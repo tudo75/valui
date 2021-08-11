@@ -1,2 +1,2 @@
 # valui
-A Vaa UI library
+A Vala Gtk3 UI library
