@@ -1,4 +1,4 @@
-project('com.github.tudo75.valui', ['vala', 'c'], version: '0.0.1')
+project('com.github.tudo75.valui', ['vala', 'c'], version: '0.0.2')
 
 dependencies = [
 	dependency('gtk+-3.0', version: '>= 3.20'),
@@ -14,7 +14,7 @@ PKGCONFIG_DEPS = [
     'cairo',
 ]
 
-API_VERSION = '0.0.1'
+API_VERSION = '0.0.2'
 
 vapidir = get_option('datadir') / 'vala' / 'vapi'
 

@@ -1,11 +1,9 @@
 
-
-
 dependencies_example = [
-	dependency('gtk+-3.0', version: '>= 3.20'),
-	dependency('glib-2.0'),
+    dependency('gtk+-3.0', version: '>= 3.20'),
+    dependency('glib-2.0'),
     dependency('cairo'),
-    dependency('valui-0.0.1'),
+    dependency('valui-' + API_VERSION),
 ]
 
 sources = files('example.vala')
