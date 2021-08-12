@@ -9,6 +9,15 @@ public class Example : Gtk.Window {
     public Example () {
         // set_default_size (400, 450);
         test_percent = 0;
+        
+        meter_0 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 50, 75, true);
+        meter_0.set_percent (83.4);
+
+        meter_1 = new ValUI.Meter (Gtk.Orientation.HORIZONTAL, 100, 100);
+        meter_1.set_percent (55.4);
+
+        meter_2 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 80, 120, true);
+        meter_2.set_percent (16.5);
     }
 }
 
@@ -31,18 +40,14 @@ public static int main (string[] args) {
     main_grid.set_column_homogeneous (true);
     main_grid.set_row_homogeneous (true);
 
-    meter_0 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 50, 75, true);
-    meter_0.set_percent (65.4);
     var frame_meter0 = new Gtk.Frame ("Vertical");
     frame_meter0.add (meter_0);
 
-    meter_1 = new ValUI.Meter (Gtk.Orientation.HORIZONTAL, 100, 100);
-    meter_1.set_percent (43.4);
     var frame_meter1 = new Gtk.Frame ("Horizontal");
     frame_meter1.add (meter_1);
 
     var plus_btn = new Gtk.Button ();
-    plus_btn.set_label ("Plus 10 Percent");
+    plus_btn.set_label ("Plus 5 Percent");
     plus_btn.clicked.connect (plus_percent);
 
     var reset_btn = new Gtk.Button ();
@@ -56,8 +61,6 @@ public static int main (string[] args) {
     main_grid.set_hexpand (true);
     main_grid.set_vexpand (true);
 
-    meter_2 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 80, 120, true);
-    meter_2.set_percent (32.5);
     var frame_meter2 = new Gtk.Frame ("Vertical");
     frame_meter2.add (meter_2);
     frame_meter2.set_halign (Gtk.Align.CENTER);
@@ -84,7 +87,7 @@ public static int main (string[] args) {
 }
 
 private void plus_percent () {
-    test_percent = test_percent + 10;
+    test_percent = test_percent + 5;
     if (test_percent <= 100) {
         meter_0.set_percent (test_percent);
         meter_1.set_percent (test_percent);
