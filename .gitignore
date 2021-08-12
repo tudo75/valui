@@ -2,7 +2,6 @@ github-dark-theme-markdown.css
 meson-configure.txt
 logo.svg
 run.sh
-*.code-workspace
 example
 
 
@@ -51,4 +50,5 @@ tests/_test
 *~
 .DS_Store
 .vscode
+*.code-workspace
 Makecache
