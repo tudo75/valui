@@ -2,13 +2,15 @@ github-dark-theme-markdown.css
 meson-configure.txt
 logo.svg
 run.sh
+*.code-workspace
+example
+
 
 *.pot
 *.mo
 *-test.desktop
 doc
 *.json
-.code-workspace
 
 Makefile.in
 Makefile
