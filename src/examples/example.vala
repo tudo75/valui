@@ -7,7 +7,7 @@ private ValUI.Meter meter_2;
 public class Example : Gtk.Window {
 
     public Example () {
-        set_default_size (400, 450);
+        set_default_size (650, 450);
         test_percent = 0;
         
         meter_0 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 50, 75, true);
@@ -27,6 +27,23 @@ public static int main (string[] args) {
     var window = new Example ();
 
     // add custom ui
+    var headerbar = new Gtk.HeaderBar ();
+    headerbar.set_title ("Examples");
+    headerbar.set_hexpand (true);
+    headerbar.set_show_close_button (true);
+
+    var plus_btn = new Gtk.Button ();
+    plus_btn.set_label ("Plus 5 Percent");
+    plus_btn.clicked.connect (plus_percent);
+
+    var reset_btn = new Gtk.Button ();
+    reset_btn.set_label ("Reset Percent");
+    reset_btn.clicked.connect (reset_percent);
+    
+    headerbar.pack_start (plus_btn);
+    headerbar.pack_start (reset_btn);
+
+    window.set_titlebar (headerbar);
 
     var main_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 6);
     
@@ -45,19 +62,9 @@ public static int main (string[] args) {
 
     var frame_meter1 = new Gtk.Frame ("Horizontal");
     frame_meter1.add (meter_1);
-
-    var plus_btn = new Gtk.Button ();
-    plus_btn.set_label ("Plus 5 Percent");
-    plus_btn.clicked.connect (plus_percent);
-
-    var reset_btn = new Gtk.Button ();
-    reset_btn.set_label ("Reset Percent");
-    reset_btn.clicked.connect (reset_percent);
     
     main_grid.attach (frame_meter0, 0, 0, 1, 1);
     main_grid.attach (frame_meter1, 1, 0, 1, 1);
-    main_grid.attach (plus_btn, 0, 1, 1, 1);
-    main_grid.attach (reset_btn, 1, 1, 1, 1);
     main_grid.set_hexpand (true);
     main_grid.set_vexpand (true);
 
@@ -75,9 +82,10 @@ public static int main (string[] args) {
     window.destroy.connect (Gtk.main_quit);
     window.show_all ();
     window.present ();
-    print  ( (window.get_allocated_width ()).to_string () + " x " + (window.get_allocated_height ()).to_string () + "\n");
-    print  ( (frame_meter0.get_allocated_width ()).to_string () + " x " + (frame_meter0.get_allocated_height ()).to_string () + "\n");
-    print  ( (frame_meter1.get_allocated_width ()).to_string () + " x " + (frame_meter1.get_allocated_height ()).to_string () + "\n");
+    print  ("window: " + (window.get_allocated_width ()).to_string () + " x " + (window.get_allocated_height ()).to_string () + "\n");
+    print  ("frame_meter0: " + (frame_meter0.get_allocated_width ()).to_string () + " x " + (frame_meter0.get_allocated_height ()).to_string () + "\n");
+    print  ("frame_meter1: " + (frame_meter1.get_allocated_width ()).to_string () + " x " + (frame_meter1.get_allocated_height ()).to_string () + "\n");
+    print  ("frame_meter2: " + (frame_meter2.get_allocated_width ()).to_string () + " x " + (frame_meter2.get_allocated_height ()).to_string () + "\n");
     meter_0.fit_size (frame_meter0);
     meter_1.fit_size (frame_meter1);
     meter_2.fit_size (frame_meter2);
@@ -89,15 +97,15 @@ public static int main (string[] args) {
 private void plus_percent () {
     test_percent = test_percent + 5;
     if (test_percent <= 100) {
-        meter_0.set_percent (test_percent);
+        meter_0.set_percent (50 + (int)((75 - 50) * test_percent / 100));
         meter_1.set_percent (test_percent);
-        meter_2.set_percent (test_percent);
+        meter_2.set_percent (30 + (int)((120 - 30) * test_percent / 100));
     }
 }
 
 private void reset_percent () {
     test_percent = 0;
-    meter_0.set_percent (test_percent);
-    meter_1.set_percent (test_percent);
-    meter_2.set_percent (test_percent);
+    meter_0.set_percent (50);
+    meter_1.set_percent (0);
+    meter_2.set_percent (30);
 }
