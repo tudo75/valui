@@ -73,7 +73,6 @@ public static int main (string[] args) {
 
     window.destroy.connect (Gtk.main_quit);
     window.show_all ();
-    window.show ();
     window.present ();
     print  ( (window.get_allocated_width ()).to_string () + " x " + (window.get_allocated_height ()).to_string () + "\n");
     print  ( (frame_meter0.get_allocated_width ()).to_string () + " x " + (frame_meter0.get_allocated_height ()).to_string () + "\n");

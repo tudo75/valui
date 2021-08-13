@@ -54,6 +54,8 @@ namespace ValUI {
             redraw_canvas ();
             if (scale_on_resize)
                 this.configure_event.connect (on_window_configure_event);
+
+            get_preferred_width (out width, out my_width);
         }
 
         public override bool draw (Cairo.Context cr) {
