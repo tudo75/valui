@@ -28,14 +28,26 @@ namespace ValUI {
      */
     public class Meter : Gtk.DrawingArea {
 
-        private double percent;
+        private int value;
         private bool vertical;
         private int my_width;
         private int my_height;
         private bool my_debug;
+        private int min_range;
+        private int max_range;
         
-        public Meter (Gtk.Orientation orientation, int width, int height, bool scale_on_resize = false, bool debug = false) {
-            percent = 0;
+        public Meter (Gtk.Orientation orientation, int min, int max, bool scale_on_resize = false, bool debug = false) {
+            if ( min > max) {
+                int tmp = min;
+                min = max;
+                max = tmp;
+            }
+
+            min_range = min;
+            max_range = max;
+
+            value = min;
+
             my_debug = debug;
 
             if (orientation == Gtk.Orientation.VERTICAL) {
@@ -44,18 +56,23 @@ namespace ValUI {
                 vertical = false;
             }
 
-            set_size_request (width, height);
+            // set_size_request (width, height);
 
+
+            int width = 80;
+            int height = 120;
             my_width = width;
             my_height = height;
-            if (my_debug)
+
+            if (my_debug) {
                 print("start size: " + (my_width).to_string () + " x " + (my_height).to_string () + "\n");
+                print("debug: " + (debug).to_string () + "\n");
+            }
 
             redraw_canvas ();
+
             if (scale_on_resize)
                 this.configure_event.connect (on_window_configure_event);
-
-            get_preferred_width (out width, out my_width);
         }
 
         public override bool draw (Cairo.Context cr) {
@@ -72,8 +89,14 @@ namespace ValUI {
                 h_rect = (double) ((double) my_width / 100) * 3.5;
                 y0_rect = (double) ((double) my_width / 100) * 4.5;
             }
+            int percent = (int) (((value - min_range) * 100) / (max_range - min_range));
 
             var limit = (int) (20 - percent / 5);
+            if (percent >= 95 && percent < 100)
+                limit = 19;
+
+            if (my_debug)
+                print ("percent: " + (percent).to_string () + " - limit: " + (limit).to_string () + "\n");
 
             cr.save ();
 
@@ -149,6 +172,12 @@ namespace ValUI {
             return false;
         }
 
+        public bool set_size (int width, int height) {
+            set_size_request (width, height);
+            redraw_canvas ();
+            return false;
+        }
+
         private bool on_window_configure_event (Gtk.Widget sender, Gdk.EventConfigure event) {
             my_width = event.width;
             my_height = event.height;
@@ -168,8 +197,13 @@ namespace ValUI {
             // window.process_updates (true);
         }
 
-        public void set_percent (double sel) {
-            percent = sel;
+        public void set_percent (int sel) {
+            if (sel <= max_range && sel >= min_range)
+                value = sel;
+
+            if (my_debug)
+                print ("value->sel: " + (value).to_string () + "\n");
+
             redraw_canvas ();
         }
     }

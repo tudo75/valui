@@ -1,5 +1,5 @@
 
-private double test_percent;
+private int test_percent;
 private ValUI.Meter meter_0;
 private ValUI.Meter meter_1;
 private ValUI.Meter meter_2;
@@ -7,17 +7,17 @@ private ValUI.Meter meter_2;
 public class Example : Gtk.Window {
 
     public Example () {
-        // set_default_size (400, 450);
+        set_default_size (400, 450);
         test_percent = 0;
         
         meter_0 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 50, 75, true);
-        meter_0.set_percent (83.4);
+        meter_0.set_percent (65);
 
-        meter_1 = new ValUI.Meter (Gtk.Orientation.HORIZONTAL, 100, 100);
-        meter_1.set_percent (55.4);
+        meter_1 = new ValUI.Meter (Gtk.Orientation.HORIZONTAL, 0, 100);
+        meter_1.set_percent (55);
 
-        meter_2 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 80, 120, true);
-        meter_2.set_percent (16.5);
+        meter_2 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 30, 120, true);
+        meter_2.set_percent (85);
     }
 }
 
@@ -62,12 +62,13 @@ public static int main (string[] args) {
     main_grid.set_vexpand (true);
 
     var frame_meter2 = new Gtk.Frame ("Vertical");
+    meter_2.set_size (100, 150);
     frame_meter2.add (meter_2);
     frame_meter2.set_halign (Gtk.Align.CENTER);
     frame_meter2.set_valign (Gtk.Align.CENTER);
 
-    main_box.pack_start (frame_meter2);
-    main_box.pack_start (main_grid);
+    main_box.pack_start (frame_meter2, true, true, 0);
+    main_box.pack_start (main_grid, true, true, 0);
 
     window.add (main_box);
 
