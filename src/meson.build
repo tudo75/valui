@@ -6,7 +6,8 @@ conf.set('PROJECT_VERSION', '0.0.1')
 conf.set('API_VERSION', API_VERSION)
 
 sources = files([
-    'meter.vala'
+    'base.vala',
+    'meter.vala',
 ])
 
 libvalui = library(
