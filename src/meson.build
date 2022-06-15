@@ -6,7 +6,9 @@ conf.set('PROJECT_VERSION', '0.0.1')
 conf.set('API_VERSION', API_VERSION)
 
 sources = files([
-    'meter.vala'
+    'base.vala',
+    'meter.vala',
+    'gauge.vala',
 ])
 
 libvalui = library(
@@ -72,6 +74,7 @@ if get_option('enable_valadoc')
         '@INPUT@',
         '--pkg=gtk+-3.0',
         '--pkg=glib-2.0',
+        '--pkg=gee-0.8',
         '--force'
         ],
         output: 'valui-' + API_VERSION)
