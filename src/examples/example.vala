@@ -18,6 +18,7 @@ public class Example : Gtk.Window {
 
         meter_2 = new ValUI.Meter (Gtk.Orientation.VERTICAL, 30, 120, true);
         meter_2.set_percent (85);
+        
     }
 }
 
@@ -56,7 +57,7 @@ public static int main (string[] args) {
     main_grid.set_margin_end (0);
     main_grid.set_column_homogeneous (true);
     main_grid.set_row_homogeneous (true);
-
+/*
     var frame_meter0 = new Gtk.Frame ("Vertical");
     frame_meter0.add (meter_0);
 
@@ -73,15 +74,47 @@ public static int main (string[] args) {
     frame_meter2.add (meter_2);
     frame_meter2.set_halign (Gtk.Align.CENTER);
     frame_meter2.set_valign (Gtk.Align.CENTER);
+*/
+    var gauge_grid = new Gtk.Grid();
+    gauge_grid.set_column_spacing (10);
+    gauge_grid.set_row_spacing (10);
+    gauge_grid.set_margin_top (5);
+    gauge_grid.set_margin_bottom (5);
+    gauge_grid.set_margin_start (5);
+    gauge_grid.set_margin_end (5);
+    gauge_grid.set_column_homogeneous (true);
+    gauge_grid.set_row_homogeneous (true);
 
-    main_box.pack_start (frame_meter2, true, true, 0);
-    main_box.pack_start (main_grid, true, true, 0);
+    var gauge_0 = new ValUI.Gauge (0, 100, ValUI.Gauge.Position.BOTTOM, true);
+    gauge_0.set_size (150, 250);
+    gauge_0.set_value (25);
+    gauge_grid.attach (gauge_0, 0, 0, 1, 1);
+
+    var gauge_1 = new ValUI.Gauge (0, 100, ValUI.Gauge.Position.LEFT, true);
+    gauge_1.set_size (150, 250);
+    gauge_1.set_value (48);
+    gauge_grid.attach (gauge_1, 1, 0, 1, 1);
+
+    var gauge_2 = new ValUI.Gauge (0, 100, ValUI.Gauge.Position.TOP, true);
+    gauge_2.set_size (205, 150);
+    gauge_2.set_value (72);
+    gauge_grid.attach (gauge_2, 0, 1, 1, 1);
+
+    var gauge_3 = new ValUI.Gauge (0, 100, ValUI.Gauge.Position.RIGHT, true);
+    gauge_3.set_size (205, 150);
+    gauge_3.set_value (96);
+    gauge_grid.attach (gauge_3, 1, 1, 1, 1);
+
+//    main_box.pack_start (frame_meter2, true, true, 0);
+//    main_box.pack_start (main_grid, true, true, 0);
+    main_box.pack_start (gauge_grid, true, true, 0);
 
     window.add (main_box);
 
     window.destroy.connect (Gtk.main_quit);
     window.show_all ();
     window.present ();
+/*
     print  ("window: " + (window.get_allocated_width ()).to_string () + " x " + (window.get_allocated_height ()).to_string () + "\n");
     print  ("frame_meter0: " + (frame_meter0.get_allocated_width ()).to_string () + " x " + (frame_meter0.get_allocated_height ()).to_string () + "\n");
     print  ("frame_meter1: " + (frame_meter1.get_allocated_width ()).to_string () + " x " + (frame_meter1.get_allocated_height ()).to_string () + "\n");
@@ -89,7 +122,7 @@ public static int main (string[] args) {
     meter_0.fit_size (frame_meter0);
     meter_1.fit_size (frame_meter1);
     meter_2.fit_size (frame_meter2);
-
+*/
     Gtk.main ();
     return 0;
 }

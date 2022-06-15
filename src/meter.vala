@@ -82,7 +82,7 @@ namespace ValUI {
             var h_rect = (double) ((double) get_my_height () / 100) * 3.5;
             var y0_rect = (double) ((double) get_my_height () / 100) * 4.5;
 
-            if (!vertical) {
+            if (!vertical) { // rotate 90°
                 x0_rect1 = (double) ((double) get_my_height () / 100) * 4.5;
                 x0_rect2 = (double) ((double) get_my_height () / 100) * 52.5;
                 w_rect = (double) ((double) get_my_height () / 100) * 43;
@@ -145,7 +145,7 @@ namespace ValUI {
                 }
             }
              if (my_debug) {
-                // DEBUG TODO draw bordercontext.set_source_rgba (1, 0, 0, 1);
+                // DEBUG draw bordercontext.set_source_rgba (1, 0, 0, 1);
                 cr.set_source_rgb (0, 0, 1);
                 cr.set_line_width (1);
 

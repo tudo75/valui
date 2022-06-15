@@ -1,9 +1,14 @@
 project('com.github.tudo75.valui', ['vala', 'c'], version: '0.0.2')
 
+cc = meson.get_compiler('c')
+m_dep = cc.find_library('m', required : false)
+
 dependencies = [
 	dependency('gtk+-3.0', version: '>= 3.20'),
 	dependency('glib-2.0'),
     dependency('cairo'),
+    dependency('gee-0.8'),
+    m_dep,
 ]
 
 pkgconfig = import('pkgconfig')
@@ -12,6 +17,7 @@ PKGCONFIG_DEPS = [
     'gtk+-3.0',
     'glib-2.0', 
     'cairo',
+    'gee-0.8'
 ]
 
 API_VERSION = '0.0.2'
